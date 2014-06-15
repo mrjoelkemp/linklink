@@ -7,8 +7,8 @@ var request = require('request');
 exports.index = function(req, res) {
   var url, top;
 
-  // If we're to process a shared link
-  if(req.query) {
+  // If we're should process a shared link
+  if(req.query.url && req.query.top) {
     url = req.query.url,
     top = req.query.top;
     res.redirect('/loadSite?url=' + url + '&top=' + top);

@@ -3,28 +3,41 @@
     <style>
       .generated-link {
         display: none;
-        position: absolute;
+        position: fixed;
         top: 60px;
         left: 40px;
-        width: 200px;
-        font-size: 17px;
         z-index: 100000;
+        padding: 10px;
+        background: #ddd;
+        border-radius: 4px;
+        box-shadow: -1px -3px 43px 31px #DFDDDD;
+      }
+      .generated-link input {
+        margin-top: 10px;
+        width: 600px;
+        font-size: 17px;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .generated-link span {
+        font-size: 15px;
       }
     </style>
   </head>
   <body>
-    <input class="generated-link"></input>
+    <div class="generated-link">
+      <span>Here's your link:</span>
+      <br />
+      <input></input>
+    </div>
 
     <div class="linklink-content">
       <%- content %>
     </div>
 
     <style>
-      * {
-        box-sizing: border-box;
-      }
-      *:hover {
-        border: 3px solid blue;
+      p:hover, *:hover {
+        /*border: 3px solid blue;*/
       }
     </style>
 
@@ -43,7 +56,7 @@
       })();
 
     </script>
-    <script src="javascripts/jquery-2.1.1.min.js"></script>
+    <script src="javascripts/vendor/jquery-2.1.1.min.js"></script>
 
     <script src="javascripts/page.js"></script>
 
