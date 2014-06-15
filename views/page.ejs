@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <style>
+      .generated-link {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 40px;
+        width: 200px;
+        font-size: 17px;
+        z-index: 100000;
+      }
+    </style>
+  </head>
+  <body>
+    <input class="generated-link"></input>
+
+    <div class="linklink-content">
+      <%- content %>
+    </div>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      *:hover {
+        border: 3px solid blue;
+      }
+    </style>
+
+    <script>
+      (function () {
+        'use strict';
+
+        // TODO: Put JS here to quickly parse
+        // and scroll to location
+        var url = "<%= url %>",
+            top = parseInt("<%= top %>", 10);
+
+        if (url && top) {
+          window.scrollTo(0, top);
+        }
+      })();
+
+    </script>
+    <script src="javascripts/jquery-2.1.1.min.js"></script>
+
+    <script src="javascripts/page.js"></script>
+
+  <body>
+</html>
