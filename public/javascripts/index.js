@@ -24,6 +24,8 @@
     return website;
   }
 
+  window.mixpanel.track('Landing Page');
+
   document.querySelector('.enter-website').addEventListener('keypress', function (event) {
     var val;
     if (event.which === 13) {
@@ -36,7 +38,6 @@
 
         } else {
           document.querySelector('.error').style.display = 'none';
-
           loadSite(this.value.trim());
         }
 
