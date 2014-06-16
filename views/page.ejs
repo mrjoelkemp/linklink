@@ -29,16 +29,17 @@
     <script>
       (function () {
         // For quick parsing and scroll to location
-        var url = "<%= url %>",
-            top = parseInt("<%= top %>", 10);
+        window.LL = {
+          url: "<%= url %>",
+          top: parseInt("<%= top %>", 10)
+        };
 
-        if (url && top) {
-          window.scrollTo(0, top);
+        if (window.LL.url && window.LL.top) {
+          window.scrollTo(0, window.LL.top);
         }
       })();
     </script>
     <script src="javascripts/vendor/jquery-2.1.1.min.js"></script>
-
     <script src="javascripts/page.js"></script>
 
   <body>

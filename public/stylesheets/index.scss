@@ -12,15 +12,18 @@
 
   .catch-phrase {
     display: block;
-    font-size: 18px;
+    font-size: 15px;
   }
 
   input {
-    padding: 5px;
-    border-radius: 5px;
+    @extend %base-input;
     margin-top: 10px;
-    font-size: 17px;
-    min-width: 300px;
+    min-width: 400px;
     text-align: center;
   }
+}
+
+.credits {
+  margin-top: 40px;
+  text-align: center;
 }

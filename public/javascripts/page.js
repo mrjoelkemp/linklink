@@ -2,27 +2,10 @@
   'use strict';
 
   /**
-   * Read a page's GET URL variables and return them as an associative array.
-   * @return {Object} Hash of query params to their values
-   * From stack overflow
-   */
-  function getUrlVars() {
-    var vars = [], hash,
-        hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-
-    for(var i = 0; i < hashes.length; i++) {
-      hash = hashes[i].split('=');
-      vars.push(hash[0]);
-      vars[hash[0]] = hash[1];
-    }
-    return vars;
-  }
-
-  /**
    * Generates the url to be shared for deep linking
    */
   function generateLink(website, topPosition) {
-    var url = window.location.host + '/?url=' + window.encodeURIComponent(website) + '&top=' + topPosition,
+    var url = window.location.origin + '/?url=' + window.encodeURIComponent(website) + '&top=' + topPosition,
         $container = $('.generated-link'),
         $input = $container.find('input');
 
@@ -32,20 +15,44 @@
     $input.focus();
   }
 
-  $('.linklink-content').on('click', '*', function (e) {
-    var $this = $(this),
-        top = $this.offset().top;
+  if (window.LL && window.LL.url && window.LL.top) {
+    // All clicks should go through the rendered site
+    $('.linklink-content').on('click', '*', function () {
+      var $this = $(this),
+          url   = window.LL.url,
+          href  = $this.prop('href'),
+          src   = $this.prop('src'),
+          containsSite = function (str) {
+            return str.indexOf(url) !== -1;
+          },
+          newLink;
 
-    // Stop the navigation of links
-    // Not sure why prevent default doesn't cut it
-    // for links
-    $this.prop('href', 'javascript:void(0)');
+      if (href && !containsSite(href)) {
+        newLink = href.replace(window.location.origin, url);
+        $this.prop('href', newLink);
+      }
 
-    generateLink(getUrlVars()['url'], top);
-    e.stopPropagation();
-    return false;
-  });
+      if (src && !containsSite(src)) {
+        newLink = src.replace(window.location.origin, url);
+        $this.prop('src', newLink);
+      }
+    });
 
-  $('.header').slideDown('fast');
+  } else {
+    $('.linklink-content').on('click', '*', function (e) {
+      var $this = $(this),
+          top = $this.offset().top;
+
+      // Stop the navigation of links
+      // Not sure why prevent default doesn't cut it for links
+      $this.prop('href', 'javascript:void(0)');
+
+      generateLink(window.LL.url, top);
+      e.stopPropagation();
+      return false;
+    });
+
+    $('.header').slideDown('fast');
+  }
 
 })(window, window.jQuery);

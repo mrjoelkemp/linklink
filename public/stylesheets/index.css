@@ -4,6 +4,12 @@
 .app-name .last {
   font-size: 20px; }
 
+.content input {
+  outline-color: #D6D6D6;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px; }
+
 .content {
   @extends %base-section-styles;
   margin: 0 auto;
@@ -13,11 +19,12 @@
     display: block; }
   .content .catch-phrase {
     display: block;
-    font-size: 18px; }
+    font-size: 15px; }
   .content input {
-    padding: 5px;
-    border-radius: 5px;
     margin-top: 10px;
-    font-size: 17px;
-    min-width: 300px;
+    min-width: 400px;
     text-align: center; }
+
+.credits {
+  margin-top: 40px;
+  text-align: center; }

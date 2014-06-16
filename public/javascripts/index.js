@@ -1,4 +1,4 @@
-;(function (window, $) {
+;(function (window) {
   'use strict';
 
   function loadSite(website) {
@@ -17,12 +17,12 @@
     return website;
   }
 
-  $('.enter-website').keypress(function(event) {
+  document.querySelector('.enter-website').addEventListener('keypress', function (event) {
     if (event.which === 13) {
       if (this.value) {
         loadSite(this.value);
-        return false;
+        event.preventDefault();
       }
     }
   });
-})(window, window.jQuery);
+})(window);

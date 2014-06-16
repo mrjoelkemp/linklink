@@ -8,11 +8,18 @@
 .app-name .last {
   font-size: 20px; }
 
+.header .generated-link input {
+  outline-color: #D6D6D6;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px; }
+
 .header {
   position: fixed;
   border-bottom: 1px solid black;
   text-align: center;
   padding: 10px;
+  padding-top: 5px;
   width: 100%;
   display: none;
   top: 0;
@@ -34,9 +41,6 @@
     display: none; }
     .header .generated-link input {
       margin-top: 10px;
-      width: 600px;
-      font-size: 15px;
-      padding: 5px;
-      border-radius: 5px; }
+      width: 500px; }
     .header .generated-link span {
       font-size: 15px; }

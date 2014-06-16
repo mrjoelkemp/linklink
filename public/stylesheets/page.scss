@@ -1,13 +1,12 @@
 @import "_base";
 
-$normal-size: 15px;
-
 .header {
   @extend %base-section-styles;
   position: fixed;
   border-bottom: 1px solid black;
   text-align: center;
   padding: 10px;
+  padding-top: 5px;
   width: 100%;
   display: none;
   top: 0;
@@ -37,11 +36,9 @@ $normal-size: 15px;
   .generated-link {
     display: none;
     input {
+      @extend %base-input;
       margin-top: 10px;
-      width: 600px;
-      font-size: $normal-size;
-      padding: 5px;
-      border-radius: 5px;
+      width: 500px;
     }
 
     span {
