@@ -24,6 +24,11 @@
     margin-top: 10px;
     min-width: 400px;
     text-align: center; }
+  .content .error {
+    display: none;
+    padding: 5px; }
+    .content .error span {
+      color: red; }
 
 .credits {
   margin-top: 40px;

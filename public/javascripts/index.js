@@ -2,7 +2,12 @@
   'use strict';
 
   function loadSite(website) {
-    window.location.href = '/loadSite?url=' + window.encodeURIComponent(formatWebsite(website));
+    window.location.href = '/?url=' + window.encodeURIComponent(formatWebsite(website));
+  }
+
+  function isUrl(str) {
+    var urlRegex = /(((http(s?)(:\/\/))?([w]{3}\.)?)([a-z|0-9])+\.(com(\.au)?|org|me|net|ly|be|gl|info|(co(\.))?uk|ca|nz|tv)(\/[^\s]+)*)+/g;
+    return urlRegex.test(str);
   }
 
   /**
@@ -18,9 +23,20 @@
   }
 
   document.querySelector('.enter-website').addEventListener('keypress', function (event) {
+    var val;
     if (event.which === 13) {
-      if (this.value) {
-        loadSite(this.value);
+      val = this.value.trim();
+
+      if (val) {
+        if (! isUrl(val)) {
+          document.querySelector('.error').style.display = 'block';
+
+        } else {
+          document.querySelector('.error').style.display = 'none';
+
+          loadSite(this.value.trim());
+        }
+
         event.preventDefault();
       }
     }

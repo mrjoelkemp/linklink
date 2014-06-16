@@ -21,6 +21,14 @@
     min-width: 400px;
     text-align: center;
   }
+
+  .error {
+    display: none;
+    padding: 5px;
+    span {
+      color: red;
+    }
+  }
 }
 
 .credits {

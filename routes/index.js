@@ -3,33 +3,26 @@ var request = require('request');
 /*
  * GET home page.
  */
-
 exports.index = function(req, res) {
-  var url, top;
+  var url = req.query.url,
+      top = req.query.top;
 
-  // If we're should process a shared link
-  if(req.query.url && req.query.top) {
-    url = req.query.url,
-    top = req.query.top;
-    res.redirect('/loadSite?url=' + url + '&top=' + top);
-    return;
+  // Whether we're processing a shared link
+  // or taking the user to generate the link
+  if (url) {
+    var website = decodeURIComponent(url);
+
+    request(website, function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+        res.render('page', {
+          content: body,
+          url: url,
+          top: top
+        });
+      }
+    });
+
+  } else {
+    res.render('index.html');
   }
-
-  res.render('index.html');
-};
-
-exports.loadSite = function (req, res) {
-  var website = decodeURIComponent(req.query.url);
-
-  if (! website) console.log('website not found');
-
-  request(website, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.render('page', {
-        content: body,
-        url: req.query.url,
-        top: req.query.top
-      });
-    }
-  });
 };
