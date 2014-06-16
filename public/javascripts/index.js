@@ -32,6 +32,7 @@
       if (val) {
         if (! isUrl(val)) {
           document.querySelector('.error').style.display = 'block';
+          window.mixpanel.track('Error', { 'type': 'url'});
 
         } else {
           document.querySelector('.error').style.display = 'none';

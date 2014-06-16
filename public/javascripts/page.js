@@ -17,6 +17,8 @@
   }
 
   if (window.LL && window.LL.url && window.LL.top) {
+    window.mixpanel.track('View', { 'type': 'Shared' });
+
     // All clicks should go through the rendered site
     $('.linklink-content').on('click', '*', function () {
       var $this = $(this),
@@ -40,6 +42,8 @@
     });
 
   } else {
+    window.mixpanel.track('View', { 'type': 'create' });
+
     $('.linklink-content').on('click', '*', function (e) {
       var $this = $(this),
           top = $this.offset().top;
