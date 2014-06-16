@@ -2,7 +2,9 @@
   'use strict';
 
   function loadSite(website) {
-    window.location.href = '/?url=' + window.encodeURIComponent(formatWebsite(website));
+    website = formatWebsite(website);
+    window.mixpanel.track('Generate', { 'url': website });
+    window.location.href = '/?url=' + window.encodeURIComponent(website);
   }
 
   function isUrl(str) {
