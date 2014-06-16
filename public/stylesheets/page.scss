@@ -1,0 +1,26 @@
+@import "_base";
+
+.generated-link {
+  @extend %base-section-styles;
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 40px;
+  z-index: 100000;
+  padding: 10px;
+  background: #ddd;
+  border-radius: 4px;
+  box-shadow: -1px -3px 43px 31px #DFDDDD;
+
+  input {
+    margin-top: 10px;
+    width: 600px;
+    font-size: 17px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  span {
+    font-size: 15px;
+  }
+}

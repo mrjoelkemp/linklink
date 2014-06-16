@@ -30,8 +30,7 @@
     var $this = $(this),
         top = $this.offset().top;
 
-    // Stop the navigation
-    // Prevent default and stopPropagation don't work
+    // Stop the navigation of links
     $this.prop('href', 'javascript:void(0)');
 
     generateLink(getUrlVars()['url'], top);

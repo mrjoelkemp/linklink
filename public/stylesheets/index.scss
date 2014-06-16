@@ -1,0 +1,35 @@
+@import "_base";
+
+.content {
+  @extends %base-section-styles;
+  margin: 0 auto;
+  margin-top: 20%;
+  text-align: center;
+
+  .app-name {
+    display: block;
+  }
+
+  .first {
+    font-weight: bold;
+    font-size: 35px;
+  }
+
+  .last {
+    font-size: 20px;
+  }
+
+  .catch-phrase {
+    display: block;
+    font-size: 18px;
+  }
+
+  input {
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 17px;
+    min-width: 300px;
+    text-align: center;
+  }
+}

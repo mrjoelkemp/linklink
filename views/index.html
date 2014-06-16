@@ -6,15 +6,49 @@
     }
 
     .content {
-      width: 500px;
-      height: 500px;
+      margin: 0 auto;
+      margin-top: 20%;
+      text-align: center;
+      font-family: "Helvetica";
+      font-size: 30px;
+    }
+    .content .app-name {
+      display: block;
+    }
+    .content .first {
+      font-weight: bold;
+      font-size: 35px;
+    }
+    .content .last {
+      font-size: 20px;
+    }
+
+    .content .catch-phrase {
+      display: block;
+      font-size: 18px;
+    }
+
+    .content input {
+      padding: 5px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 17px;
+      min-width: 300px;
+      text-align: center;
     }
     </style>
   </head>
 
   <body>
-    <input class="enter-website" placeholder="Enter a website" value="www.bbc.com" autofocus></input>
-    <div class="content"></div>
+    <div class="content">
+      <span class="app-name"><span class="first">Link</span><span class="last">Link</span></span>
+      <span class="catch-phrase">Deep link to any section of any page on the web</span>
+      <input class="enter-website" placeholder="Enter a website" value="www.bbc.com" autofocus></input>
+    </div>
+
+    <div class="credits">
+      <span> Built by <a href="" target="_blank" rel="nofollow">@mrjoelkemp</a>
+    </div>
 
     <script src="javascripts/vendor/jquery-2.1.1.min.js"></script>
     <script src="javascripts/index.js"></script>
