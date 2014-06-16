@@ -1,0 +1,26 @@
+.generated-link, .instructions {
+  font-family: "Helvetica";
+  font-size: 30px; }
+
+.generated-link {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 40px;
+  z-index: 100000;
+  padding: 10px;
+  background: #ddd;
+  border-radius: 4px;
+  box-shadow: -1px -3px 43px 31px #DFDDDD; }
+  .generated-link input {
+    margin-top: 10px;
+    width: 600px;
+    font-size: 17px;
+    padding: 5px;
+    border-radius: 5px; }
+  .generated-link span {
+    font-size: 15px; }
+
+.instructions {
+  padding: 10px;
+  width: 100%; }

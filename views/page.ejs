@@ -1,29 +1,8 @@
 <html>
   <head>
-    <style>
-      .generated-link {
-        display: none;
-        position: fixed;
-        top: 60px;
-        left: 40px;
-        z-index: 100000;
-        padding: 10px;
-        background: #ddd;
-        border-radius: 4px;
-        box-shadow: -1px -3px 43px 31px #DFDDDD;
-      }
-      .generated-link input {
-        margin-top: 10px;
-        width: 600px;
-        font-size: 17px;
-        padding: 5px;
-        border-radius: 5px;
-      }
-      .generated-link span {
-        font-size: 15px;
-      }
-    </style>
+    <link rel="stylesheet" href="stylesheets/page.css" />
   </head>
+
   <body>
     <div class="generated-link">
       <span>Here's your <span class="first">Link</span><span class="last">Link</span>:</span>
@@ -39,18 +18,9 @@
       <%- content %>
     </div>
 
-    <style>
-      p:hover, *:hover {
-        /*border: 3px solid blue;*/
-      }
-    </style>
-
     <script>
       (function () {
-        'use strict';
-
-        // TODO: Put JS here to quickly parse
-        // and scroll to location
+        // For quick parsing and scroll to location
         var url = "<%= url %>",
             top = parseInt("<%= top %>", 10);
 
@@ -58,7 +28,6 @@
           window.scrollTo(0, top);
         }
       })();
-
     </script>
     <script src="javascripts/vendor/jquery-2.1.1.min.js"></script>
 

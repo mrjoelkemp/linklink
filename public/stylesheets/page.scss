@@ -24,3 +24,14 @@
     font-size: 15px;
   }
 }
+
+.instructions {
+  @extend %base-section-styles;
+  font-size: 20px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  span {
+  }
+}
