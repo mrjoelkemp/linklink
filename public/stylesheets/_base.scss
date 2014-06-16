@@ -2,3 +2,20 @@
   font-family: "Helvetica";
   font-size: 30px;
 }
+
+.app-name {
+  .first {
+    font-weight: bold;
+    font-size: 35px;
+  }
+
+  .last {
+    font-size: 20px;
+  }
+}
+
+@mixin box-shadow($args) {
+  -webkit-box-shadow: $args;
+  -moz-box-shadow: $args;
+  box-shadow: $args;
+}

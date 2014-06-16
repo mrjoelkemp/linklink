@@ -1,37 +1,52 @@
 @import "_base";
 
-.generated-link {
+$normal-size: 15px;
+
+.header {
   @extend %base-section-styles;
-  display: none;
   position: fixed;
-  top: 60px;
-  left: 40px;
-  z-index: 100000;
-  padding: 10px;
-  background: #ddd;
-  border-radius: 4px;
-  box-shadow: -1px -3px 43px 31px #DFDDDD;
-
-  input {
-    margin-top: 10px;
-    width: 600px;
-    font-size: 17px;
-    padding: 5px;
-    border-radius: 5px;
-  }
-
-  span {
-    font-size: 15px;
-  }
-}
-
-.instructions {
-  @extend %base-section-styles;
-  font-size: 20px;
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   text-align: center;
   padding: 10px;
   width: 100%;
+  display: none;
+  top: 0;
+  @include box-shadow(0px 1px 22px -6px #CCC);
+  z-index: 100000;
+  background: rgba(255, 255, 255, 0.95);
+
   span {
+    font-size: $normal-size;
   }
+
+  .app-name {
+    $first: 25px;
+    .first {
+      font-size: $first;
+    }
+    .last {
+      font-size: $normal-size;
+    }
+  }
+
+  .instructions {
+    display: inline-block;
+    font-size: $normal-size;
+  }
+
+  .generated-link {
+    display: none;
+    input {
+      margin-top: 10px;
+      width: 600px;
+      font-size: $normal-size;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    span {
+      font-size: $normal-size;
+    }
+  }
+
 }

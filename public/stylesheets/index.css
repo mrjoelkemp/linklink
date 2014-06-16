@@ -1,3 +1,9 @@
+.app-name .first {
+  font-weight: bold;
+  font-size: 35px; }
+.app-name .last {
+  font-size: 20px; }
+
 .content {
   @extends %base-section-styles;
   margin: 0 auto;
@@ -5,11 +11,6 @@
   text-align: center; }
   .content .app-name {
     display: block; }
-  .content .first {
-    font-weight: bold;
-    font-size: 35px; }
-  .content .last {
-    font-size: 20px; }
   .content .catch-phrase {
     display: block;
     font-size: 18px; }

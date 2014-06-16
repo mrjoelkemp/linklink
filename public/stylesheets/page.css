@@ -1,26 +1,42 @@
-.generated-link, .instructions {
+.header {
   font-family: "Helvetica";
   font-size: 30px; }
 
-.generated-link {
-  display: none;
-  position: fixed;
-  top: 60px;
-  left: 40px;
-  z-index: 100000;
-  padding: 10px;
-  background: #ddd;
-  border-radius: 4px;
-  box-shadow: -1px -3px 43px 31px #DFDDDD; }
-  .generated-link input {
-    margin-top: 10px;
-    width: 600px;
-    font-size: 17px;
-    padding: 5px;
-    border-radius: 5px; }
-  .generated-link span {
-    font-size: 15px; }
+.app-name .first {
+  font-weight: bold;
+  font-size: 35px; }
+.app-name .last {
+  font-size: 20px; }
 
-.instructions {
+.header {
+  position: fixed;
+  border-bottom: 1px solid black;
+  text-align: center;
   padding: 10px;
-  width: 100%; }
+  width: 100%;
+  display: none;
+  top: 0;
+  -webkit-box-shadow: 0px 1px 22px -6px #cccccc;
+  -moz-box-shadow: 0px 1px 22px -6px #cccccc;
+  box-shadow: 0px 1px 22px -6px #cccccc;
+  z-index: 100000;
+  background: rgba(255, 255, 255, 0.95); }
+  .header span {
+    font-size: 15px; }
+  .header .app-name .first {
+    font-size: 25px; }
+  .header .app-name .last {
+    font-size: 15px; }
+  .header .instructions {
+    display: inline-block;
+    font-size: 15px; }
+  .header .generated-link {
+    display: none; }
+    .header .generated-link input {
+      margin-top: 10px;
+      width: 600px;
+      font-size: 15px;
+      padding: 5px;
+      border-radius: 5px; }
+    .header .generated-link span {
+      font-size: 15px; }
