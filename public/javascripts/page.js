@@ -6,11 +6,12 @@
    */
   function generateLink(website, topPosition) {
     var url = window.location.origin + '/?url=' + window.encodeURIComponent(website) + '&top=' + topPosition,
-        $container = $('.generated-link'),
+        $header = $('.linklink-header'),
+        $container = $header.find('.generated-link'),
         $input = $container.find('input');
 
     $input.val(url);
-    $('.header').find('.instructions').hide();
+    $header.find('.instructions').hide();
     $container.css('display', 'inline-block');
     $input.focus();
   }
@@ -52,7 +53,7 @@
       return false;
     });
 
-    $('.header').slideDown('fast');
+    $('.linklink-header').slideDown('fast');
   }
 
 })(window, window.jQuery);

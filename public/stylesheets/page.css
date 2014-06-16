@@ -1,4 +1,4 @@
-.header {
+.linklink-header {
   font-family: "Helvetica";
   font-size: 30px; }
 
@@ -8,13 +8,13 @@
 .app-name .last {
   font-size: 20px; }
 
-.header .generated-link input {
+.linklink-header .generated-link input {
   outline-color: #D6D6D6;
   border-radius: 5px;
   padding: 5px;
   font-size: 15px; }
 
-.header {
+.linklink-header {
   position: fixed;
   border-bottom: 1px solid black;
   text-align: center;
@@ -28,19 +28,19 @@
   box-shadow: 0px 1px 22px -6px #cccccc;
   z-index: 100000;
   background: rgba(255, 255, 255, 0.95); }
-  .header span {
+  .linklink-header span {
     font-size: 15px; }
-  .header .app-name .first {
+  .linklink-header .app-name .first {
     font-size: 25px; }
-  .header .app-name .last {
+  .linklink-header .app-name .last {
     font-size: 15px; }
-  .header .instructions {
+  .linklink-header .instructions {
     display: inline-block;
     font-size: 15px; }
-  .header .generated-link {
+  .linklink-header .generated-link {
     display: none; }
-    .header .generated-link input {
+    .linklink-header .generated-link input {
       margin-top: 10px;
       width: 500px; }
-    .header .generated-link span {
+    .linklink-header .generated-link span {
       font-size: 15px; }
