@@ -2,6 +2,11 @@
   font-family: "Helvetica";
   font-size: 30px; }
 
+.app-name a {
+  text-decoration: none;
+  color: black; }
+  .app-name a:hover {
+    text-decoration: none; }
 .app-name .first {
   font-weight: bold;
   font-size: 35px; }

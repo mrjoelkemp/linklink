@@ -1,3 +1,6 @@
+.app-name a {
+  text-decoration: none;
+  color: black; }
 .app-name .first {
   font-weight: bold;
   font-size: 35px; }
