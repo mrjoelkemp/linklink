@@ -19,6 +19,8 @@
   if (window.LL && window.LL.url && window.LL.top) {
     window.mixpanel.track('View', { 'type': 'Shared' });
 
+    $('.linklink-credits').fadeIn('slow');
+
     // All clicks should go through the rendered site
     $('.linklink-content').on('click', '*', function () {
       var $this = $(this),

@@ -7,7 +7,7 @@
   <body>
 
     <div class="linklink-header">
-      <span class="app-name">
+      <span class="app-name-small">
         <a href="/"><span class="first">Link</span><span class="last">Link</span></a>
       </span>
 
@@ -23,12 +23,21 @@
       </div>
     </div>
 
+    <div class="linklink-credits">
+      <span>
+        Deep-linked with
+        <span class="app-name-baby">
+          <a href="/"><span class="first">Link</span><span class="last">Link</span></a>
+        </span>
+      </span>
+    </div>
+
     <div class="linklink-content">
       <%- content %>
     </div>
 
     <script>
-      (function () {
+      ;(function () {
         // For quick parsing and scroll to location
         window.LL = {
           url: "<%= url %>",

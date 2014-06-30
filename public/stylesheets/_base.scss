@@ -23,6 +23,28 @@ $normal-size: 15px;
   }
 }
 
+.app-name-small {
+  @extend .app-name;
+
+  $first: 25px;
+  .first {
+    font-size: $first;
+  }
+  .last {
+    font-size: $normal-size;
+  }
+}
+
+.app-name-baby {
+  @extend .app-name;
+  .first {
+    font-size: 20px;
+  }
+  .last {
+    font-size: 13px;
+  }
+}
+
 @mixin box-shadow($args) {
   -webkit-box-shadow: $args;
   -moz-box-shadow: $args;
