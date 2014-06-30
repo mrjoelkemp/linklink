@@ -3,6 +3,8 @@
 
   /**
    * Generates the url to be shared for deep linking
+   * and sets up the input for sharing
+   * @returns {String} The generated url
    */
   function generateLink(website, topPosition) {
     var url = window.location.origin + '/?url=' + window.encodeURIComponent(website) + '&top=' + topPosition,
@@ -14,6 +16,8 @@
     $header.find('.instructions').hide();
     $container.css('display', 'inline-block');
     $input.focus();
+
+    return url;
   }
 
   if (window.LL && window.LL.url && window.LL.top) {
@@ -53,13 +57,22 @@
 
     $('.linklink-content').on('click', '*', function (e) {
       var $this = $(this),
-          top = $this.offset().top;
+          top = $this.offset().top,
+          url;
 
       // Stop the navigation of links
       // Not sure why prevent default doesn't cut it for links
       $this.prop('href', 'javascript:void(0)');
 
-      generateLink(window.LL.url, top);
+      url = generateLink(window.LL.url, top);
+
+      $('.generated-link')
+        .find('a')
+          .prop('href', url)
+          .click(function () {
+            $('.linklink-header').find('input').focus();
+          });
+
       e.stopPropagation();
       return false;
     });

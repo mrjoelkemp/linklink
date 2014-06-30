@@ -55,6 +55,10 @@
       width: 500px; }
     .linklink-header .generated-link span {
       font-size: 15px; }
+    .linklink-header .generated-link a {
+      font-size: 13px;
+      color: blue;
+      text-decoration: underline; }
 
 .linklink-credits {
   display: none;
