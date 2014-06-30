@@ -17,6 +17,8 @@
    * @return {String} - Formatted website
    */
   function formatWebsite(website) {
+    website = website.replace('https://', 'http://');
+
     if (website.indexOf('http://') === -1) {
       website = 'http://' + website;
     }

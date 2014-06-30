@@ -23,8 +23,8 @@ I built [Linklink](http://linklink.herokuapp.com/) to solve that problem by lett
 
 ##### Https
 
-Sites that render pages in `https` are problematic. A quick fix is to remove the `s` from `https` in the url
-that you provide to Linklink.
+Sites that render pages in `https` are problematic. Linklink will automatically replace `https` with `http`,
+however, that's not a guaranteed fix.
 
 ##### Login-required sites
 
