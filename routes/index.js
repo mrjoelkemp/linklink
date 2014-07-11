@@ -7,7 +7,7 @@ var request = require('request'),
 exports.index = function(req, res) {
   var url = req.query.url,
       top = req.query.top,
-      options, hostname;
+      options;
 
   // Whether we're processing a shared link
   // or taking the user to generate the link
@@ -19,14 +19,14 @@ exports.index = function(req, res) {
       timeout: 2000
     };
 
-    hostname = u.parse(url).href;
-
+    console.log('headers: ', req.headers)
     request(options, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        body = resolveHrefs(body, hostname);
+        body = resolveHrefs(body, url);
 
         res.render('page', {
           content: body,
+          currentHost: req.headers.host,
           url: url,
           top: top
         });
@@ -44,17 +44,19 @@ exports.index = function(req, res) {
 /**
  * Add a hostname to all src and href values without one
  * @param  {String} body     html content of the webpage
- * @param  {String} hostname the hostname of the rendered content
+ * @param  {String} url      the url to view
  * @return {String}          html content with hostname-less src/hrefs modified
  */
-function resolveHrefs(body, hostname) {
+function resolveHrefs(body, url) {
   var pattern = /(href|src)=['"]{1}([^"']*)['"]{1}/g,
       match = pattern.exec(body),
       newBody = body,
       skippedPaths = ['', '/', '#'],
       // LUT to guarantee that we don't reprocess values
       processed = {},
-      path, host;
+      parsedUrl = u.parse(url),
+      path, host, resolvedPath,
+      findPattern, replacePattern;
 
   while (match != null) {
     path = match[2];
@@ -62,13 +64,19 @@ function resolveHrefs(body, hostname) {
     if (path && skippedPaths.indexOf(path) === -1) {
       host = u.parse(path).host;
 
-      if (!host) {
+      // Skip paths that inherit the protocol like //pagead2.googlesyndication.com/pagead/show_ads.js
+      if (!host && path.indexOf('//') !== 0) {
+
         // @todo: for perf, split the body into lines then modify the lines
         // Need to join the array at the end to get back the html string
-
         // Make sure to not replace already replaced instances
         if (typeof processed[path] === 'undefined') {
-          newBody = newBody.replace(path, hostname + path);
+          resolvedPath = parsedUrl.protocol + '//' + parsedUrl.hostname + (path[0] === '/' ? path : '/' + path);
+
+          findPattern = '(href|src)=(\'|"){1}(' + path + ')[\'"]{1}';
+          replacePattern = '$1=$2' + resolvedPath + '$2';
+
+          newBody = newBody.replace(new RegExp(findPattern), replacePattern);
           processed[path] = true;
         }
       }
