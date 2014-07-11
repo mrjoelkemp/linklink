@@ -19,7 +19,6 @@ exports.index = function(req, res) {
       timeout: 2000
     };
 
-    console.log('headers: ', req.headers)
     request(options, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         body = resolveHrefs(body, url);
@@ -73,7 +72,8 @@ function resolveHrefs(body, url) {
         if (typeof processed[path] === 'undefined') {
           resolvedPath = parsedUrl.protocol + '//' + parsedUrl.hostname + (path[0] === '/' ? path : '/' + path);
 
-          findPattern = '(href|src)=(\'|"){1}(' + path + ')[\'"]{1}';
+          findPattern = '(href|src)=(\'|"){1}(' + regexEscape(path) + ')[\'"]{1}';
+          // findPattern = '(href|src)=(\'|"){1}(' + path + ')[\'"]{1}';
           replacePattern = '$1=$2' + resolvedPath + '$2';
 
           newBody = newBody.replace(new RegExp(findPattern), replacePattern);
@@ -86,4 +86,8 @@ function resolveHrefs(body, url) {
   }
 
   return newBody;
+}
+
+function regexEscape(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
