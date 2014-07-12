@@ -1,7 +1,6 @@
 {
-  "name": "linklink",
-  "version": "0.0.1",
-  "private": true,
+  "name": "linklink.io",
+  "version": "1.0.0",
   "author": "Joel Kemp <joel@mrjoelkemp.com>",
   "scripts": {
     "start": "node app.js"
