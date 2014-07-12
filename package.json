@@ -1,7 +1,8 @@
 {
-  "name": "LinkLink",
+  "name": "linklink",
   "version": "0.0.1",
   "private": true,
+  "author": "Joel Kemp <joel@mrjoelkemp.com>",
   "scripts": {
     "start": "node app.js"
   },

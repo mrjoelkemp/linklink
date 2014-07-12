@@ -1,12 +1,17 @@
 ;(function (window) {
   'use strict';
 
+  /** @type {String} website */
   function loadSite(website) {
     website = formatWebsite(website);
     window.mixpanel.track('Generate', { 'url': website });
     window.location.href = '/?url=' + window.encodeURIComponent(website);
   }
 
+  /**
+   * @param  {String}  str
+   * @return {Boolean} Whether or not the given url is valid
+   */
   function isUrl(str) {
     var urlRegex = /(((http(s?)(:\/\/))?([w]{3}\.)?)([a-z|0-9])+\.(com(\.au)?|org|me|net|ly|be|gl|info|(co(\.))?uk|ca|nz|tv)(\/[^\s]+)*)+/g;
     return urlRegex.test(str);
