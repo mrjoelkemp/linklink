@@ -29,6 +29,14 @@
   padding: 5px;
   font-size: 15px; }
 
+.linklink-content .highlight-clicked-item {
+  -webkit-animation: all 1s ease-in;
+  -moz-animation: all 1s ease-in;
+  animation: all 1s ease-in;
+  background-color: rgba(255, 255, 130, 0.43) !important;
+  border-radius: 6px;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.3); }
+
 .linklink-header {
   position: fixed;
   border-bottom: 1px solid black;

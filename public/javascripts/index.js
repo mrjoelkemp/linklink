@@ -44,6 +44,7 @@
           window.mixpanel.track('Error', { 'type': 'url'});
 
         } else {
+          window.mixpanel.track('Click-to-Create');
           document.querySelector('.error').style.display = 'none';
           loadSite(this.value.trim());
         }
