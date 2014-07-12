@@ -63,3 +63,9 @@
     top: 1px;
   }
 }
+
+.linklink-content {
+  .highlight-clicked-item {
+    @extend %highlight;
+  }
+}
