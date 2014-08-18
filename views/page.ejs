@@ -76,7 +76,10 @@
           // Links to the actual element
           } else if (window.LL.path) {
             window.LL.element = window.LL.getElementByXpath(window.LL.path);
-            window.scrollTo(0, window.LL.getScrollTopToElement(window.LL.element));
+
+            setTimeout(function() {
+              window.scrollTo(0, window.LL.getScrollTopToElement(window.LL.element));
+            }, 500);
           }
         }
       })();

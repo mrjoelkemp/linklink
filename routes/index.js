@@ -1,5 +1,6 @@
 var request = require('request'),
-    u       = require('url');
+    u       = require('url'),
+    str = require('../helpers/string');
 
 /**
  * Routes :
@@ -74,13 +75,12 @@ function resolveHrefs(body, url) {
     if (path && skippedPaths.indexOf(path) === -1) {
       host = u.parse(path).host;
 
-      pathHasLeadingSlash = path[0] === '/';
+      pathHasLeadingSlash = str.hasLeadingSlash(path[0]);
 
       // Skip paths that inherit the protocol like //pagead2.googlesyndication.com
       if (!host && path.indexOf('//') !== 0) {
         // Make sure to not replace already replaced instances
         if (typeof processed[path] === 'undefined') {
-
           if (pathHasLeadingSlash) {
             hostname = parsedUrl.protocol + '//' + parsedUrl.hostname;
           } else if (usesBaseTag) {
@@ -89,14 +89,21 @@ function resolveHrefs(body, url) {
             hostname = parsedUrl.href;
           }
 
-          resolvedPath =  hostname + (pathHasLeadingSlash ? path : '/' + path);
+          resolvedPath = str.slashJoin(hostname, path);
 
-          findPattern = '(href|src)=(\'|"){1}(' + regexEscape(path) + ')[\'"]{1}';
+          findPattern = '(href|src)=(\'|"){1}(' + str.regexEscape(path) + ')[\'"]{1}';
 
           replacePattern = '$1=$2' + resolvedPath + '$2';
 
           newBody = newBody.replace(new RegExp(findPattern), replacePattern);
           processed[path] = true;
+
+          // DEBUG
+          if (path.indexOf('.js') !== -1) {
+            console.log('hostname: ', hostname);
+            console.log('path: ', path);
+            console.log('resolved: ', resolvedPath);
+          }
         }
       }
     }
@@ -105,9 +112,4 @@ function resolveHrefs(body, url) {
   }
 
   return newBody;
-}
-
-/** @return {String} */
-function regexEscape(text) {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }

@@ -1,4 +1,4 @@
-### Linklink
+### Linklink [![build status](https://travis-ci.org/mrjoelkemp/linklink.svg?branch=master)](https://travis-ci.org/mrjoelkemp/linklink)
 
 > Deep link to any section of (almost) any webpage
 
