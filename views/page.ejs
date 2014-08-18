@@ -68,6 +68,8 @@
           }
         };
 
+        var cushion = 100;
+
         if (window.LL.url) {
           // Links using the top as the indicator
           if (window.LL.top) {
@@ -76,10 +78,7 @@
           // Links to the actual element
           } else if (window.LL.path) {
             window.LL.element = window.LL.getElementByXpath(window.LL.path);
-
-            setTimeout(function() {
-              window.scrollTo(0, window.LL.getScrollTopToElement(window.LL.element));
-            }, 500);
+            window.scrollTo(0, window.LL.getScrollTopToElement(window.LL.element) - cushion);
           }
         }
       })();
