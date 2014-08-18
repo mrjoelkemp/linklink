@@ -28,5 +28,5 @@ describe('string', function() {
       expect(str.slashJoin('foo.com/', '/foo.js')).to.be('foo.com/foo.js');
       // Currently does not work if host or path have more than one leading or trailing slash
     });
-  })
+  });
 });

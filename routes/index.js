@@ -1,6 +1,7 @@
 var request = require('request'),
     u       = require('url'),
-    str = require('../helpers/string');
+    str = require('../helpers/string'),
+    urlh = require('../helpers/url');
 
 /**
  * Routes :
@@ -55,61 +56,40 @@ exports.index = function(req, res) {
  * @return {String}          html content with hostname-less src/hrefs modified
  */
 function resolveHrefs(body, url) {
-  var basePattern = /base\shref=['"]{1}([^"']*)['"]{1}/,
-      usesBaseTag = basePattern.test(body),
-      baseHref = usesBaseTag ? basePattern.exec(body)[1] : null,
-      pattern = /(href|src)=['"]{1}([^"']*)['"]{1}/g,
-      match = pattern.exec(body),
+  var baseHref = urlh.getBaseTagValue(body),
       newBody = body,
-      skippedPaths = ['', '/', '#'],
       // LUT to guarantee that we don't reprocess values
       processed = {},
-      parsedUrl = u.parse(url),
-      pathHasLeadingSlash, hostname,
-      path, host, resolvedPath,
-      findPattern, replacePattern;
+      parsedUrl = u.parse(url);
 
-  while (match != null) {
-    path = match[2];
+  urlh.forEachHref(body, function(path) {
+    if (!path || urlh.isSkippedPath(path)) { return; }
 
-    if (path && skippedPaths.indexOf(path) === -1) {
-      host = u.parse(path).host;
+    var host = u.parse(path).host;
+    var hostname;
 
-      pathHasLeadingSlash = str.hasLeadingSlash(path[0]);
-
-      // Skip paths that inherit the protocol like //pagead2.googlesyndication.com
-      if (!host && path.indexOf('//') !== 0) {
-        // Make sure to not replace already replaced instances
-        if (typeof processed[path] === 'undefined') {
-          if (pathHasLeadingSlash) {
-            hostname = parsedUrl.protocol + '//' + parsedUrl.hostname;
-          } else if (usesBaseTag) {
-            hostname = baseHref;
-          } else {
-            hostname = parsedUrl.href;
-          }
-
-          resolvedPath = str.slashJoin(hostname, path);
-
-          findPattern = '(href|src)=(\'|"){1}(' + str.regexEscape(path) + ')[\'"]{1}';
-
-          replacePattern = '$1=$2' + resolvedPath + '$2';
-
-          newBody = newBody.replace(new RegExp(findPattern), replacePattern);
-          processed[path] = true;
-
-          // DEBUG
-          if (path.indexOf('.js') !== -1) {
-            console.log('hostname: ', hostname);
-            console.log('path: ', path);
-            console.log('resolved: ', resolvedPath);
-          }
+    // Skip paths that inherit the protocol like //pagead2.googlesyndication.com
+    if (!host && path.indexOf('//') !== 0) {
+      // Make sure to not replace already replaced instances
+      if (typeof processed[path] === 'undefined') {
+        if (str.hasLeadingSlash(path[0])) {
+          hostname = parsedUrl.protocol + '//' + parsedUrl.hostname;
+        } else if (baseHref) {
+          hostname = baseHref;
+        } else {
+          hostname = parsedUrl.href;
         }
+
+        var resolvedPath = str.slashJoin(hostname, path);
+        var findPattern = '(href|src)=(\'|"){1}(' + str.regexEscape(path) + ')[\'"]{1}';
+        var replacePattern = '$1=$2' + resolvedPath + '$2';
+
+        newBody = newBody.replace(new RegExp(findPattern), replacePattern);
+        processed[path] = true;
       }
     }
-
-    match = pattern.exec(body);
-  }
+  });
 
   return newBody;
 }
+

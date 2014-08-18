@@ -1,0 +1,14 @@
+{
+  "curly": true,
+  "trailing": true,
+  "newcap": true,
+  "boss": true,
+  "browser": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "expr": true,
+  "immed": true,
+  "latedef": true,
+  "undef": true,
+  "unused": "vars"
+}
