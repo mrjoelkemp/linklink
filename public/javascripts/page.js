@@ -109,8 +109,6 @@
    * @return {Deferred}
    */
   function getBitlyUrl(url) {
-    var defaultMessage = 'Having trouble generating a url';
-
     return $.ajax({
       type: 'GET',
       url: 'https://api-ssl.bitly.com/v3/shorten',
@@ -121,9 +119,9 @@
       }
     })
     .then(function(response) {
-      return response.data.url || defaultMessage;
+      return response.data.url || url;
     }, function() {
-      return defaultMessage;
+      return url;
     });
   }
 
