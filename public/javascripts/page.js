@@ -49,21 +49,30 @@
     $('.linklink-content').css('cursor', 'pointer');
 
     $('.linklink-content').on('click', '*', function (e) {
-      var $this = $(this),
-          path = getXPath(this),
-          url;
+      var $this = $(this);
+      var path = getXPath(this);
 
       // Stop the navigation of links. Not sure why prevent default doesn't cut it for links
       $this.prop('href', 'javascript:void(0)');
 
-      url = generateLink(window.LL.url, path);
+      generateLink(window.LL.url, path)
+      .then(function(url) {
+        var $header = $('.linklink-header');
+        var $container = $header.find('.generated-link');
+        var $input = $container.find('input');
 
-      $('.generated-link')
-      .find('a')
+        $input.val(url);
+        $header.find('.instructions').hide();
+        $container.css('display', 'inline-block');
+        $input.focus();
+        $input[0].setSelectionRange(0, $input.val().length);
+
+        $('.generated-link').find('a')
         .prop('href', url)
         .click(function () {
           $('.linklink-header').find('input').focus();
         });
+      });
 
       e.stopPropagation();
       return false;
@@ -78,20 +87,44 @@
    * @returns {String} The generated url
    */
   function generateLink(website, path) {
-    var url = window.location.origin +
+    var origin;
+
+    // So that bitly deems it a valid url
+    if (window.location.origin.indexOf('localhost') !== -1) {
+      origin = 'http://www.linklink.io';
+    } else {
+      origin = window.location.origin;
+    }
+
+    var url = origin +
               '/?url=' + window.encodeURIComponent(website) +
-              '&path=' + window.encodeURIComponent(path),
-        $header = $('.linklink-header'),
-        $container = $header.find('.generated-link'),
-        $input = $container.find('input');
+              '&path=' + window.encodeURIComponent(path);
 
-    $input.val(url);
-    $header.find('.instructions').hide();
-    $container.css('display', 'inline-block');
-    $input.focus();
-    $input[0].setSelectionRange(0, $input.val().length);
+    return getBitlyUrl(url);
+  }
 
-    return url;
+  /**
+   * Gets a shortened bitly url
+   * @param  {String} url
+   * @return {Deferred}
+   */
+  function getBitlyUrl(url) {
+    var defaultMessage = 'Having trouble generating a url';
+
+    return $.ajax({
+      type: 'GET',
+      url: 'https://api-ssl.bitly.com/v3/shorten',
+      dataType: 'json',
+      data: {
+        access_token: '395ebf33ed5bb3fa03dda990bcb6be28b5da68b4',
+        longUrl: url
+      }
+    })
+    .then(function(response) {
+      return response.data.url || defaultMessage;
+    }, function() {
+      return defaultMessage;
+    });
   }
 
   /**
