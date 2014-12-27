@@ -1,6 +1,14 @@
 ;(function (window, $) {
   'use strict';
 
+  var isDev = window.location.origin.indexOf('localhost') !== -1;
+
+  /**
+   * If you want to hit the bitly api when generating a link, make this true
+   * @type {Boolean}
+   */
+  var testingBitly = false;
+
   // Determine the proper flow for the user
   if (window.LL && window.LL.url && (window.LL.top || window.LL.path)) {
     viewLinkLink();
@@ -90,7 +98,7 @@
     var origin;
 
     // So that bitly deems it a valid url
-    if (window.location.origin.indexOf('localhost') !== -1) {
+    if (isDev && testingBitly) {
       origin = 'http://www.linklink.io';
     } else {
       origin = window.location.origin;
@@ -100,7 +108,14 @@
               '/?url=' + window.encodeURIComponent(website) +
               '&path=' + window.encodeURIComponent(path);
 
-    return getBitlyUrl(url);
+    if (isDev && !testingBitly) {
+      var deferred = $.Deferred();
+      deferred.resolve(url);
+      return deferred.promise();
+
+    } else {
+      return getBitlyUrl(url);
+    }
   }
 
   /**

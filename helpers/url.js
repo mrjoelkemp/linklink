@@ -1,3 +1,5 @@
+var jsdom = require('jsdom').jsdom;
+
 /**
  * Iterator for all href or src properties in the given body of html text
  * @param  {String}   body
@@ -38,4 +40,18 @@ module.exports.getBaseTagValue = function(body) {
 module.exports.isSkippedPath = function(url) {
   var skippedPaths = ['', '/', '#'];
   return skippedPaths.indexOf(url) !== -1;
+};
+
+/**
+ * Does a decodeURIComponent and replaces html entities
+ * @param  {String} url - the encoded url
+ * @return {String}
+ */
+module.exports.decode = function(url) {
+  var document = jsdom('<div></div>');
+  var div = document.createElement('div');
+
+  div.innerHTML = decodeURIComponent(url);
+
+  return div.firstChild.nodeValue;
 };

@@ -1,7 +1,7 @@
-var request = require('request'),
-    u       = require('url'),
-    str = require('../helpers/string'),
-    urlh = require('../helpers/url');
+var request = require('request');
+var u = require('url');
+var str = require('../helpers/string');
+var urlh = require('../helpers/url');
 
 /**
  * Routes :
@@ -18,7 +18,11 @@ exports.index = function(req, res) {
   // Whether we're processing a shared link
   // or taking the user to generate the link
   if (url) {
-    url = decodeURIComponent(url);
+    console.log('Received url: ', url);
+
+    url = urlh.decode(url);
+
+    console.log('Decoded url: ', url);
 
     if (path) path = decodeURIComponent(path);
 
@@ -29,6 +33,7 @@ exports.index = function(req, res) {
 
     request(options, function (error, response, body) {
       if (!error && response.statusCode === 200) {
+        console.log('Successfully fetched: ', url)
         body = resolveHrefs(body, url);
 
         res.render('page', {
