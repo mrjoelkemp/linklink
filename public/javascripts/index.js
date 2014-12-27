@@ -33,7 +33,9 @@
 
   window.mixpanel.track('Landing Page');
 
-  document.querySelector('.enter-website').addEventListener('keypress', function (event) {
+  var enterWebsiteInput = document.querySelector('.enter-website');
+
+  enterWebsiteInput.addEventListener('keypress', function (event) {
     var val;
     if (event.which === 13) {
       val = this.value.trim();
@@ -53,4 +55,7 @@
       }
     }
   });
+
+  enterWebsiteInput.setSelectionRange(0, enterWebsiteInput.value.length);
+
 })(window);

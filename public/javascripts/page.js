@@ -89,7 +89,7 @@
     $header.find('.instructions').hide();
     $container.css('display', 'inline-block');
     $input.focus();
-    $input[0].setSelectionRange(0, $input.val().length)
+    $input[0].setSelectionRange(0, $input.val().length);
 
     return url;
   }
