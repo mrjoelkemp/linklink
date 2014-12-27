@@ -2,6 +2,7 @@
   "name": "linklink.io",
   "version": "1.0.0",
   "author": "Joel Kemp <joel@mrjoelkemp.com>",
+  "private": true,
   "scripts": {
     "start": "node app.js",
     "test": "mocha test/**/*.js -R dot"
