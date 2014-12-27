@@ -8,8 +8,9 @@
     "test": "mocha test/**/*.js -R dot"
   },
   "dependencies": {
-    "express": "3.10.5",
     "ejs": "^1.0.0",
+    "express": "3.10.5",
+    "jsdom": "~1.5.0",
     "request": "^2.36.0"
   },
   "devDependencies": {

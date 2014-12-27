@@ -34,4 +34,12 @@ describe('url', function() {
       expect(url.isSkippedPath('//foo.com')).to.be(false);
     });
   });
+
+  describe('decode', function() {
+    it('decodes a url and its embedded html entities (#31)', function() {
+      var encoded = 'http://ubuntuforums.org/showthread.php%3Ft%3D684264%26amp;page%3D6';
+      var expected = 'http://ubuntuforums.org/showthread.php?t=684264&page=6';
+      expect(url.decode(encoded)).to.be(expected);
+    });
+  });
 });
