@@ -1,0 +1,18 @@
+@import "_base";
+
+.error {
+  @extend %base-section-styles;
+  font-size: 18px;
+  width: 550px;
+  margin: 0 auto;
+  margin-top: 20%;
+
+  a {
+    font-weight: bold;
+  }
+
+  span {
+    display: block;
+    margin-bottom: 20px;
+  }
+}

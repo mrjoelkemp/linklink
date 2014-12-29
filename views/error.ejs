@@ -1,0 +1,20 @@
+<html>
+<head>
+    <% include header %>
+    <link rel="stylesheet" href="//<%= currentHost %>/stylesheets/error.css?v=1.6" />
+</head>
+<body>
+  <div class="error">
+    <span>Whoopsie daisies!</span>
+    <span>Looks like we ran into an issue fetching <%= url %></span>
+    <span>Try refreshing the page. If that doesn't work, feel free to reach out by <a href="https://github.com/mrjoelkemp/linklink/issues/new" target="_blank" rel="nofollow">filing an issue</a>.</span>
+    <span>Paste the following error into the issue:</span>
+    <pre>
+      <%= url %>
+      <%= time %>
+
+      <%= error %>
+    </pre>
+  </div>
+</body>
+</html>

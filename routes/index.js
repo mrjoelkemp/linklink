@@ -15,8 +15,7 @@ exports.index = function(req, res) {
       path = req.query.path || '',
       options;
 
-  // Whether we're processing a shared link
-  // or taking the user to generate the link
+  // Whether we're processing a shared link or taking the user to generate the link
   if (url) {
     console.log('Received url: ', url);
 
@@ -28,7 +27,7 @@ exports.index = function(req, res) {
 
     options = {
       url: url,
-      timeout: 2000
+      timeout: 5000
     };
 
     request(options, function (error, response, body) {
@@ -44,8 +43,21 @@ exports.index = function(req, res) {
           path: path
         });
 
-      } else {
-        res.send(error);
+      } else if(error) {
+        var args = [
+          'url: ' + url,
+          'path: ' + path,
+          'error: ' + JSON.stringify(error)
+        ];
+
+        console.log('Error\n', args.join('\n'));
+
+        res.render('error', {
+          currentHost: req.headers.host,
+          url: url,
+          time: new Date(),
+          error: JSON.stringify(error)
+        });
       }
     });
 
