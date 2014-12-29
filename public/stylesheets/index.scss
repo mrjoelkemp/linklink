@@ -1,7 +1,7 @@
 @import "_base";
 
 .content {
-  @extends %base-section-styles;
+  @extend %base-section-styles;
   margin: 0 auto;
   margin-top: 20%;
   text-align: center;
