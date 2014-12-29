@@ -60,6 +60,8 @@
       var $this = $(this);
       var path = getXPath(this);
 
+      highlightElement(this);
+
       // Stop the navigation of links. Not sure why prevent default doesn't cut it for links
       $this.prop('href', 'javascript:void(0)');
 
