@@ -1,6 +1,12 @@
 ;(function (window) {
   'use strict';
 
+  var isDev = window.location.origin.indexOf('localhost') !== -1;
+
+  if (isDev) {
+    window.mixpanel.track = function(){};
+  }
+
   /** @type {String} website */
   function loadSite(website) {
     website = formatWebsite(website);

@@ -5,6 +5,10 @@
 
   var isDev = window.location.origin.indexOf('localhost') !== -1;
 
+  if (isDev) {
+    window.mixpanel.track = function(){};
+  }
+
   /**
    * If you want to hit the bitly api when generating a link, make this true
    * @type {Boolean}
