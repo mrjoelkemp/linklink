@@ -1,6 +1,8 @@
 ;(function (window, $) {
   'use strict';
 
+  window.LL = window.LL || {};
+
   var isDev = window.location.origin.indexOf('localhost') !== -1;
 
   /**
@@ -9,18 +11,39 @@
    */
   var testingBitly = false;
 
+  var pixelCushionFromTop = 100;
+
   // Determine the proper flow for the user
   if (window.LL && window.LL.url && (window.LL.top || window.LL.path)) {
-    viewLinkLink();
+    window.mixpanel.track('View-a-Link', { url: window.LL.url });
 
   } else {
     createLinkLink();
   }
 
-  function viewLinkLink() {
-    window.mixpanel.track('View-a-Link', { url: window.LL.url });
+  /**
+   * Returns the offset/scroll distance of the element from the body element
+   * @param  {DOM Node} element
+   * @return {Number}
+   */
+  function getScrollTopToElement(element) {
+    var bodyRect = document.body.getBoundingClientRect(),
+        elemRect = element.getBoundingClientRect(),
+        offset   = elemRect.top - bodyRect.top;
 
-    highlightElement(window.LL.element);
+    return offset;
+  }
+
+  /**
+   * It's expected that this will be called from the
+   * embedded script to find the linklinked node
+   *
+   * @param  {Dom Node} element
+   */
+  window.LL.viewLinkLink = function (element) {
+    window.scrollTo(0, getScrollTopToElement(element) - pixelCushionFromTop);
+
+    highlightElement(element);
 
     $('.linklink-credits')
       .fadeIn('slow')
