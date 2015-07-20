@@ -2,6 +2,7 @@ var request = require('request');
 var u = require('url');
 var str = require('../helpers/string');
 var urlh = require('../helpers/url');
+var isRelativePath = require('is-relative-path');
 
 /**
  * Routes :
@@ -86,25 +87,25 @@ function resolveHrefs(body, url) {
     var hostname;
 
     // Skip paths that inherit the protocol like //pagead2.googlesyndication.com
-    if (!host && path.indexOf('//') !== 0) {
-      // Make sure to not replace already replaced instances
-      if (typeof processed[path] === 'undefined') {
-        if (str.hasLeadingSlash(path[0])) {
-          hostname = parsedUrl.protocol + '//' + parsedUrl.hostname;
-        } else if (baseHref) {
-          hostname = baseHref;
-        } else {
-          hostname = parsedUrl.href;
-        }
+    if (host || path.indexOf('//') === 0) { return; }
 
-        var resolvedPath = str.slashJoin(hostname, path);
-        var findPattern = '(href|src)=(\'|"){1}(' + str.regexEscape(path) + ')[\'"]{1}';
-        var replacePattern = '$1=$2' + resolvedPath + '$2';
+    // Make sure to not replace already replaced instances
+    if (typeof processed[path] !== 'undefined') { return; }
 
-        newBody = newBody.replace(new RegExp(findPattern), replacePattern);
-        processed[path] = true;
-      }
+    if (str.hasLeadingSlash(path[0]) || isRelativePath(path)) {
+      hostname = parsedUrl.protocol + '//' + parsedUrl.hostname;
+    } else if (baseHref) {
+      hostname = baseHref;
+    } else {
+      hostname = parsedUrl.href;
     }
+
+    var resolvedPath = str.slashJoin(hostname, path);
+    var findPattern = '(href|src)=(\'|"){1}(' + str.regexEscape(path) + ')[\'"]{1}';
+    var replacePattern = '$1=$2' + resolvedPath + '$2';
+
+    newBody = newBody.replace(new RegExp(findPattern), replacePattern);
+    processed[path] = true;
   });
 
   return newBody;
