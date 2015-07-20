@@ -1,3 +1,6 @@
+var path = require('path');
+var isRelativePath = require('is-relative-path');
+
 /**
  * Escapes special regex characters
  * @param {String} text
@@ -25,20 +28,22 @@ module.exports.hasLeadingSlash = function(str) {
 
 /**
  * Concatenates the two string with at most a single slash between them
+ *
  * @example
  *   hostname = www.foo.com/
  *   path = /javascripts/scripts.js
  *   returned = www.foo.com/javascripts/scripts.js
+ *
  * @param  {String} hostname
- * @param  {String} path
+ * @param  {String} subpath
  * @return {String}
  */
-module.exports.slashJoin = function(hostname, path) {
+module.exports.slashJoin = function(hostname, subpath) {
   var first = this.hasTrailingSlash(hostname) ?
               hostname.slice(0, hostname.length - 1) :
               hostname;
 
-  var last = this.hasLeadingSlash(path) ? path.slice(1) : path;
+  var last = this.hasLeadingSlash(subpath) ? subpath.slice(1) : subpath;
 
   return first + '/' + last;
 };
