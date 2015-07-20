@@ -200,9 +200,5 @@
     var $element = $(element);
 
     $element.addClass('highlight-clicked-item');
-
-    window.setTimeout(function() {
-      $element.removeClass('highlight-clicked-item')
-    }, 1500);
   }
 })(window, window.jQuery);
